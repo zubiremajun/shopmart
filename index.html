@@ -470,9 +470,9 @@ from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
    - Template ID: Email Templates
 ===================================================== */
 
-const EMAILJS_PUBLIC_KEY  = "YOUR_EMAILJS_PUBLIC_KEY";
-const EMAILJS_SERVICE_ID  = "YOUR_EMAILJS_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY  = "3Hbg-0gXLuoRnX2pC";
+const EMAILJS_SERVICE_ID  = "service_uhc1czk";
+const EMAILJS_TEMPLATE_ID = "template_fow0jfd";
 
 /* Template variables used: {{to_email}} {{to_name}} {{otp_code}} {{app_name}} {{valid_minutes}} */
 
@@ -695,9 +695,15 @@ throw new Error("Email service is not set up yet. Add your EmailJS keys in the c
 otpCode=makeOtp();
 otpTries=0;
 
-const res=await fetch("https://api.emailjs.com/api/v1.0/email/send",{
+const controller=new AbortController();
+const timeout=setTimeout(()=>controller.abort(),20000); // 20s max wait
+
+let res;
+try{
+res=await fetch("https://api.emailjs.com/api/v1.0/email/send",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
+signal:controller.signal,
 body:JSON.stringify({
 service_id:EMAILJS_SERVICE_ID,
 template_id:EMAILJS_TEMPLATE_ID,
@@ -711,6 +717,14 @@ valid_minutes:String(Math.round(OTP_SECONDS/60))
 }
 })
 });
+}catch(err){
+otpCode=null;
+if(err&&err.name==="AbortError")
+throw new Error("Network is slow. Could not send the code, please try again.");
+throw new Error("No internet connection. Please check your network and try again.");
+}finally{
+clearTimeout(timeout);
+}
 
 if(!res.ok){
 otpCode=null;
