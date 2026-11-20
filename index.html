@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff650c">
+<title>ShopMart - Buy Sell Deliver</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+body{
+    font-family:Arial,sans-serif;
+    background:linear-gradient(180deg,#fff4ea 0%,#f4f5f8 260px);
+    color:#202124;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+button,input{font:inherit}
+button{cursor:pointer}
+
+/* ---------- HEADER / LOGO ---------- */
+header{
+    background:white;
+    padding:14px 12px 10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 4px 18px #ff65000f;
+    border-bottom:4px solid #f47716;
+    border-radius:0 0 26px 26px;
+}
+
+.logo-wrap{
+    width:190px;
+    height:190px;
+    border-radius:42px;
+    overflow:hidden;
+    background:white;
+    box-shadow:0 10px 28px #f4771630;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.logo{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+/* fallback logo if image fails */
+.logo-fallback{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+    text-align:center;
+}
+.logo-fallback .bag{font-size:70px;line-height:1}
+.logo-fallback .name{font-size:34px;font-weight:900;color:#111}
+.logo-fallback .name span{color:#f47716}
+.logo-fallback .tag{font-size:12px;color:#444;margin-top:4px}
+
+.container{
+    width:100%;
+    max-width:440px;
+    padding:15px;
+    margin:10px auto;
+    flex:1;
+}
+
+.welcome{text-align:center;margin-bottom:20px}
+
+.welcome h1{
+    color:#f47716;
+    font-size:27px;
+    margin:10px 0;
+}
+
+.welcome p{color:#888;font-size:13px;margin-top:3px}
+
+.cat{
+    font-size:70px;
+    display:inline-block;
+    animation:cat 2s infinite ease-in-out;
+    filter:drop-shadow(0 10px 7px #0002);
+}
+
+@keyframes cat{
+    0%,100%{transform:translateY(0) rotate(-5deg) scale(1)}
+    50%{transform:translateY(-12px) rotate(5deg) scale(1.08)}
+}
+
+.card{
+    background:white;
+    padding:23px 19px;
+    border-radius:18px;
+    box-shadow:0 8px 30px #0000000c;
+}
+
+.tabs{display:flex;gap:8px;margin-bottom:22px}
+
+.tab{
+    flex:1;
+    padding:13px;
+    border:0;
+    border-radius:9px;
+    background:#eee;
+    font-weight:bold;
+    color:#555;
+    transition:.2s;
+}
+
+.tab.active{background:#f47716;color:white}
+
+h2{font-size:23px;margin-bottom:8px}
+
+.subtitle{
+    font-size:13px;
+    color:#888;
+    margin-bottom:20px;
+    line-height:1.5;
+}
+
+.field{margin-bottom:15px}
+
+.field label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.field input{
+    width:100%;
+    height:49px;
+    padding:0 12px;
+    border:1px solid #ddd;
+    border-radius:9px;
+    background:#fafafa;
+    outline:none;
+    transition:.2s;
+}
+
+.field input:focus{
+    border-color:#f47716;
+    background:white;
+    box-shadow:0 0 0 3px #f4771620;
+}
+
+.password{position:relative}
+.password input{padding-right:65px}
+
+.toggle{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    border:0;
+    background:none;
+    color:#f47716;
+    font-size:12px;
+    font-weight:bold;
+    padding:8px;
+}
+
+.primary{
+    width:100%;
+    height:50px;
+    border:0;
+    border-radius:10px;
+    background:linear-gradient(135deg,#ff9b20,#ef4b0a);
+    color:white;
+    font-weight:bold;
+    margin-top:8px;
+    box-shadow:0 5px 12px #f4771630;
+    transition:transform .1s;
+}
+.primary:active{transform:scale(.98)}
+.primary:disabled{opacity:.6;cursor:not-allowed}
+
+.secondary{
+    display:block;
+    width:100%;
+    padding:13px;
+    background:none;
+    border:0;
+    color:#f47716;
+    font-weight:bold;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:12px;
+    margin:5px 0 14px;
+}
+
+.row label{display:flex;gap:5px;align-items:center}
+.row input{accent-color:#f47716}
+
+.link-btn{
+    width:auto;
+    padding:6px 0;
+    display:inline-block;
+    font-size:12px;
+}
+
+.message{
+    display:none;
+    padding:12px;
+    margin-bottom:15px;
+    border-radius:8px;
+    font-size:13px;
+    overflow-wrap:anywhere;
+}
+
+.message.error{display:block;background:#fff0f0;color:#d63031}
+.message.success{display:block;background:#e9fff0;color:#168348}
+
+.hidden{display:none!important}
+
+.dashboard{
+    background:white;
+    padding:22px;
+    border-radius:16px;
+    box-shadow:0 5px 25px #0001;
+}
+
+.dashboard h2{color:#f47716}
+
+.profile{
+    background:#f5f5f7;
+    padding:13px;
+    margin:10px 0;
+    border-radius:9px;
+    font-size:13px;
+    overflow-wrap:anywhere;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.profile .val{flex:1;user-select:text;-webkit-user-select:text}
+
+.copy{
+    border:0;
+    background:#f47716;
+    color:white;
+    font-size:11px;
+    font-weight:bold;
+    padding:7px 11px;
+    border-radius:7px;
+    flex-shrink:0;
+}
+.copy.done{background:#168348}
+
+.footer{
+    text-align:center;
+    color:#999;
+    font-size:11px;
+    padding:20px;
+}
+
+@media(max-width:360px){
+    .card{padding:17px 13px}
+    .welcome h1{font-size:23px}
+    .logo-wrap{width:160px;height:160px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo-wrap">
+        <img class="logo" id="logoImg"
+             src="https://i.postimg.cc/5yVCbFXx/file-00000000d8c48211a80ef6d95a0a0e9e.png"
+             alt="ShopMart Logo">
+        <div class="logo-fallback" id="logoFallback">
+            <div class="bag">🛍️</div>
+            <div class="name">Shop<span>Mart</span></div>
+            <div class="tag">Buy • Sell • Deliver</div>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+
+<section class="welcome">
+    <div class="cat">🐱</div>
+    <h1>Welcome to ShopMart!</h1>
+    <p>BUY • SELL • DELIVER</p>
+    <p>Your Marketplace, Your Business.</p>
+</section>
+
+<div id="message" class="message"></div>
+
+<section id="authSection" class="card">
+
+<div class="tabs">
+    <button id="loginTab" class="tab active" type="button">LOGIN</button>
+    <button id="registerTab" class="tab" type="button">REGISTER</button>
+</div>
+
+<!-- LOGIN -->
+<div id="loginView">
+<h2>Welcome Back!</h2>
+<p class="subtitle">Login to your ShopMart account.</p>
+
+<form id="loginForm" novalidate>
+
+<div class="field">
+<label for="loginIdentity">Email or Mobile Number</label>
+<input id="loginIdentity" type="text"
+placeholder="Email or +8801XXXXXXXXX"
+autocomplete="username" required>
+</div>
+
+<div class="field">
+<label for="loginPassword">Password</label>
+<div class="password">
+<input id="loginPassword" type="password"
+placeholder="Enter password"
+autocomplete="current-password" required>
+<button type="button" class="toggle" data-target="loginPassword">Show</button>
+</div>
+</div>
+
+<div class="row">
+<label>
+<input type="checkbox" id="remember" checked>
+Remember me
+</label>
+
+<button type="button" id="forgotLink" class="secondary link-btn">
+Forgot Password?
+</button>
+</div>
+
+<button class="primary" id="loginButton" type="submit">LOGIN TO SHOPMART</button>
+
+<button type="button" class="secondary" id="goRegister">
+New here? Create an account
+</button>
+
+</form>
+</div>
+
+<!-- REGISTER -->
+<div id="registerView" class="hidden">
+<h2>Create Account</h2>
+<p class="subtitle">Join the ShopMart marketplace.</p>
+
+<form id="registerForm" novalidate>
+
+<div class="field">
+<label for="regName">Full Name</label>
+<input id="regName" type="text" placeholder="Enter your name"
+autocomplete="name" required>
+</div>
+
+<div class="field">
+<label for="regEmail">Email Address</label>
+<input id="regEmail" type="email" placeholder="example@gmail.com"
+autocomplete="email" required>
+</div>
+
+<div class="field">
+<label for="regPhone">Mobile Number (Required)</label>
+<input id="regPhone" type="tel" placeholder="+8801XXXXXXXXX"
+autocomplete="tel" required>
+</div>
+
+<div class="field">
+<label for="regPassword">Password</label>
+<div class="password">
+<input id="regPassword" type="password"
+placeholder="Minimum 8 characters"
+autocomplete="new-password" required>
+<button type="button" class="toggle" data-target="regPassword">Show</button>
+</div>
+</div>
+
+<div class="field">
+<label for="regConfirm">Confirm Password</label>
+<div class="password">
+<input id="regConfirm" type="password" placeholder="Confirm password"
+autocomplete="new-password" required>
+<button type="button" class="toggle" data-target="regConfirm">Show</button>
+</div>
+</div>
+
+<button class="primary" id="registerButton" type="submit">CREATE ACCOUNT</button>
+
+<button type="button" class="secondary" id="goLogin">
+Already have an account? Login
+</button>
+
+</form>
+</div>
+
+<!-- FORGOT -->
+<div id="forgotView" class="hidden">
+<h2>Forgot Password?</h2>
+<p class="subtitle">
+Enter your registered email address to receive a password reset link.
+</p>
+
+<form id="forgotForm" novalidate>
+<div class="field">
+<label for="forgotEmail">Registered Email</label>
+<input id="forgotEmail" type="email" placeholder="Enter your email"
+autocomplete="email" required>
+</div>
+
+<button class="primary" id="forgotButton" type="submit">SEND RESET LINK</button>
+</form>
+
+<button type="button" id="backLogin" class="secondary">← Back to Login</button>
+</div>
+
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="dashboard hidden">
+
+<h2>Welcome to ShopMart! 🛍️</h2>
+
+<p style="font-size:13px;color:#888;margin:10px 0">
+Your account is successfully connected.
+</p>
+
+<div class="profile">
+<div class="val"><b>Name:</b> <span id="userName"></span></div>
+<button type="button" class="copy" data-copy="userName">COPY</button>
+</div>
+
+<div class="profile">
+<div class="val"><b>Email:</b> <span id="userEmail"></span></div>
+<button type="button" class="copy" data-copy="userEmail">COPY</button>
+</div>
+
+<div class="profile">
+<div class="val"><b>Mobile:</b> <span id="userPhone"></span></div>
+<button type="button" class="copy" data-copy="userPhone">COPY</button>
+</div>
+
+<div class="profile">
+<div class="val"><b>Member ID:</b> <span id="userUID"></span></div>
+<button type="button" class="copy" data-copy="userUID">COPY</button>
+</div>
+
+<button class="primary" id="logoutButton" type="button" style="background:#222">
+LOG OUT
+</button>
+
+</section>
+
+</main>
+
+<footer class="footer">
+© 2026 ShopMart. All Rights Reserved.
+<br><br>
+BUY • SELL • DELIVER
+</footer>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+signInWithCustomToken,
+sendPasswordResetEmail,
+onAuthStateChanged,
+signOut,
+updateProfile,
+deleteUser,
+setPersistence,
+browserLocalPersistence,
+browserSessionPersistence
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+import { getDatabase, ref, set, get }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
+
+import { getFunctions, httpsCallable }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-functions.js";
+
+
+/* ===================================
+   FIREBASE CONFIGURATION
+   (replace YOUR_... values with your real keys)
+=================================== */
+
+const firebaseConfig = {
+apiKey: "YOUR_FIREBASE_API_KEY",
+authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+projectId: "YOUR_PROJECT_ID",
+storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+appId: "YOUR_FIREBASE_APP_ID"
+};
+
+
+/* ===================================
+   HELPERS (run before Firebase so buttons always work)
+=================================== */
+
+const $ = id => document.getElementById(id);
+
+function notify(text,type="error"){
+const box=$("message");
+box.textContent=text;
+box.className="message "+type;
+box.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+function clearNotice(){ $("message").className="message"; }
+
+function loading(button,state,original){
+button.disabled=state;
+button.textContent=state?"Please wait...":original;
+}
+
+function normalizePhone(value){
+let phone=value.trim().replace(/[\s().-]/g,"");
+if(phone.startsWith("00")) phone="+"+phone.substring(2);
+if(/^01[3-9]\d{8}$/.test(phone)) phone="+88"+phone;
+if(/^8801[3-9]\d{8}$/.test(phone)) phone="+"+phone;
+if(!/^\+[1-9]\d{7,14}$/.test(phone))
+throw new Error("Enter a valid mobile number with country code.");
+return phone;
+}
+
+function errorMessage(error){
+const code=error?.code||"";
+if(code==="auth/email-already-in-use") return "This email is already registered.";
+if(code==="auth/invalid-credential"||code==="auth/wrong-password"||code==="auth/user-not-found"||code==="functions/not-found"||code==="functions/unauthenticated")
+return "Incorrect email/mobile or password.";
+if(code==="functions/already-exists") return "This mobile number is already registered.";
+if(code==="auth/weak-password") return "Password must contain at least 8 characters.";
+if(code==="auth/invalid-email") return "Invalid email address.";
+if(code==="auth/network-request-failed") return "Internet connection problem.";
+if(code==="auth/too-many-requests") return "Too many attempts. Try again later.";
+if(code==="auth/api-key-not-valid"||code==="auth/invalid-api-key"||code==="auth/configuration-not-found")
+return "Firebase is not configured yet. Add your real Firebase keys.";
+return error?.message||"Something went wrong.";
+}
+
+function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+
+/* ===================================
+   LOGO FALLBACK
+=================================== */
+
+$("logoImg").addEventListener("error",()=>{
+$("logoImg").style.display="none";
+$("logoFallback").style.display="flex";
+});
+
+
+/* ===================================
+   PAGE NAVIGATION (works even without Firebase)
+=================================== */
+
+function showView(view){
+$("loginView").classList.toggle("hidden",view!=="login");
+$("registerView").classList.toggle("hidden",view!=="register");
+$("forgotView").classList.toggle("hidden",view!=="forgot");
+$("loginTab").classList.toggle("active",view==="login"||view==="forgot");
+$("registerTab").classList.toggle("active",view==="register");
+}
+
+$("loginTab").onclick=()=>{ clearNotice(); showView("login"); };
+$("registerTab").onclick=()=>{ clearNotice(); showView("register"); };
+$("goRegister").onclick=()=>{ clearNotice(); showView("register"); };
+$("goLogin").onclick=()=>{ clearNotice(); showView("login"); };
+$("backLogin").onclick=()=>{ clearNotice(); showView("login"); };
+
+$("forgotLink").onclick=()=>{
+const value=$("loginIdentity").value.trim();
+if(value.includes("@")) $("forgotEmail").value=value;
+clearNotice();
+showView("forgot");
+};
+
+
+/* ===================================
+   SHOW / HIDE PASSWORD
+=================================== */
+
+document.querySelectorAll(".toggle").forEach(button=>{
+button.onclick=()=>{
+const input=$(button.dataset.target);
+if(input.type==="password"){
+input.type="text"; button.textContent="Hide";
+}else{
+input.type="password"; button.textContent="Show";
+}
+};
+});
+
+
+/* ===================================
+   COPY BUTTONS
+=================================== */
+
+async function copyText(text){
+try{
+await navigator.clipboard.writeText(text);
+return true;
+}catch(e){
+try{
+const t=document.createElement("textarea");
+t.value=text;
+t.style.position="fixed";
+t.style.opacity="0";
+document.body.appendChild(t);
+t.select();
+const ok=document.execCommand("copy");
+document.body.removeChild(t);
+return ok;
+}catch(err){ return false; }
+}
+}
+
+document.querySelectorAll(".copy").forEach(btn=>{
+btn.onclick=async()=>{
+const text=$(btn.dataset.copy).textContent.trim();
+if(!text||text==="Loading..."||text==="Unavailable"||text==="Not available"){
+notify("Nothing to copy yet.");
+return;
+}
+const ok=await copyText(text);
+btn.textContent=ok?"COPIED ✓":"FAILED";
+btn.classList.toggle("done",ok);
+setTimeout(()=>{ btn.textContent="COPY"; btn.classList.remove("done"); },1500);
+};
+});
+
+
+/* ===================================
+   FIREBASE INIT (safe: errors won't break the buttons above)
+=================================== */
+
+let auth,database,loginPhone,registerPhone;
+let firebaseReady=false;
+
+try{
+const app=initializeApp(firebaseConfig);
+auth=getAuth(app);
+database=getDatabase(app);
+const functions=getFunctions(app,"asia-south1");
+loginPhone=httpsCallable(functions,"loginWithPhone");
+registerPhone=httpsCallable(functions,"registerPhoneIndex");
+firebaseReady=true;
+}catch(error){
+console.error(error);
+}
+
+function needFirebase(){
+if(!firebaseReady){
+notify("Firebase is not configured yet. Add your real Firebase keys.");
+return false;
+}
+return true;
+}
+
+let registering=false; // stops dashboard flash during registration
+
+
+/* ===================================
+   REGISTRATION
+=================================== */
+
+$("registerForm").addEventListener("submit",async e=>{
+e.preventDefault();
+if(!needFirebase()) return;
+
+const button=$("registerButton");
+const name=$("regName").value.trim();
+const email=$("regEmail").value.trim().toLowerCase();
+const password=$("regPassword").value;
+const confirm=$("regConfirm").value;
+
+if(name.length<2){ notify("Enter your full name."); return; }
+if(!isValidEmail(email)){ notify("Invalid email address."); return; }
+
+let phone;
+try{ phone=normalizePhone($("regPhone").value); }
+catch(error){ notify(error.message); return; }
+
+if(password.length<8){ notify("Password must be at least 8 characters."); return; }
+if(password!==confirm){ notify("Passwords do not match."); return; }
+
+loading(button,true,"CREATE ACCOUNT");
+registering=true;
+
+let user=null;
+
+try{
+const result=await createUserWithEmailAndPassword(auth,email,password);
+user=result.user;
+
+await updateProfile(user,{displayName:name});
+
+await set(ref(database,"users/"+user.uid),{
+uid:user.uid,
+fullName:name,
+email:email,
+phone:phone,
+createdAt:Date.now(),
+accountStatus:"active"
+});
+
+await registerPhone({phone:phone});
+
+await signOut(auth);
+
+$("registerForm").reset();
+$("loginIdentity").value=email;
+$("loginPassword").value="";
+showView("login");
+notify("Registration successful! Please login.","success");
+
+}catch(error){
+
+// roll back so the email is not stuck half-registered
+if(user){
+await set(ref(database,"users/"+user.uid),null).catch(()=>{});
+await deleteUser(user).catch(()=>{});
+await signOut(auth).catch(()=>{});
+}
+
+notify(errorMessage(error));
+
+}finally{
+registering=false;
+loading(button,false,"CREATE ACCOUNT");
+}
+});
+
+
+/* ===================================
+   EMAIL OR MOBILE LOGIN
+=================================== */
+
+$("loginForm").addEventListener("submit",async e=>{
+e.preventDefault();
+if(!needFirebase()) return;
+
+const button=$("loginButton");
+const identity=$("loginIdentity").value.trim();
+const password=$("loginPassword").value;
+
+if(!identity||!password){ notify("Enter your login details."); return; }
+
+loading(button,true,"LOGIN TO SHOPMART");
+
+try{
+
+await setPersistence(
+auth,
+$("remember").checked?browserLocalPersistence:browserSessionPersistence
+);
+
+if(identity.includes("@")){
+
+await signInWithEmailAndPassword(auth,identity.toLowerCase(),password);
+
+}else{
+
+const phone=normalizePhone(identity);
+
+const result=await loginPhone({phone:phone,password:password});
+
+if(!result.data?.customToken) throw new Error("Invalid login response.");
+
+await signInWithCustomToken(auth,result.data.customToken);
+
+}
+
+clearNotice();
+$("loginPassword").value="";
+
+}catch(error){
+notify(errorMessage(error));
+}finally{
+loading(button,false,"LOGIN TO SHOPMART");
+}
+});
+
+
+/* ===================================
+   FORGOT PASSWORD
+=================================== */
+
+$("forgotForm").addEventListener("submit",async e=>{
+e.preventDefault();
+if(!needFirebase()) return;
+
+const button=$("forgotButton");
+const email=$("forgotEmail").value.trim().toLowerCase();
+
+if(!isValidEmail(email)){ notify("Invalid email address."); return; }
+
+loading(button,true,"SEND RESET LINK");
+
+try{
+await sendPasswordResetEmail(auth,email);
+$("forgotForm").reset();
+notify("If this email is registered, a password reset link has been sent.","success");
+setTimeout(()=>showView("login"),3000);
+}catch(error){
+// don't reveal whether the email exists
+if(error?.code==="auth/user-not-found"){
+notify("If this email is registered, a password reset link has been sent.","success");
+}else{
+notify(errorMessage(error));
+}
+}finally{
+loading(button,false,"SEND RESET LINK");
+}
+});
+
+
+/* ===================================
+   DASHBOARD
+=================================== */
+
+async function dashboard(user){
+$("authSection").classList.add("hidden");
+$("dashboard").classList.remove("hidden");
+
+$("userName").textContent=user.displayName||"ShopMart Member";
+$("userEmail").textContent=user.email||"Not available";
+$("userUID").textContent=user.uid;
+$("userPhone").textContent="Loading...";
+
+try{
+const result=await get(ref(database,"users/"+user.uid));
+if(result.exists()){
+const data=result.val();
+$("userName").textContent=data.fullName||user.displayName||"Member";
+$("userPhone").textContent=data.phone||"Not available";
+}else{
+$("userPhone").textContent="Not available";
+}
+}catch(error){
+$("userPhone").textContent="Unavailable";
+}
+}
+
+
+/* ===================================
+   AUTH SESSION
+=================================== */
+
+if(firebaseReady){
+onAuthStateChanged(auth,user=>{
+if(user&&!registering){
+dashboard(user);
+}else if(!user){
+$("dashboard").classList.add("hidden");
+$("authSection").classList.remove("hidden");
+showView("login");
+}
+});
+}
+
+
+/* ===================================
+   LOGOUT
+=================================== */
+
+$("logoutButton").onclick=async()=>{
+if(!needFirebase()) return;
+
+const button=$("logoutButton");
+loading(button,true,"LOG OUT");
+
+try{
+await signOut(auth);
+$("loginPassword").value="";
+setTimeout(()=>notify("Successfully logged out.","success"),150);
+}catch(error){
+notify(errorMessage(error));
+}finally{
+loading(button,false,"LOG OUT");
+}
+};
+
+</script>
+
+</body>
+</html>
