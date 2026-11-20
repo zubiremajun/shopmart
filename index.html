@@ -21,6 +21,21 @@ body{
 button,input{font:inherit}
 button{cursor:pointer}
 
+/* ---------- SPLASH (shown while checking auto-login) ---------- */
+#splash{
+    position:fixed;inset:0;z-index:100;
+    background:#fff;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:18px;
+}
+#splash .spin{
+    width:42px;height:42px;border-radius:50%;
+    border:4px solid #f4771630;border-top-color:#f47716;
+    animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+#splash p{color:#f47716;font-weight:bold;font-size:14px}
+
 /* ---------- HEADER / LOGO ---------- */
 header{
     background:white;
@@ -34,33 +49,20 @@ header{
 }
 
 .logo-wrap{
-    width:190px;
-    height:190px;
+    width:190px;height:190px;
     border-radius:42px;
     overflow:hidden;
     background:white;
     box-shadow:0 10px 28px #f4771630;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    display:flex;align-items:center;justify-content:center;
 }
 
-.logo{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    display:block;
-}
+.logo{width:100%;height:100%;object-fit:contain;display:block}
 
-/* fallback logo if image fails */
 .logo-fallback{
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    height:100%;
-    text-align:center;
+    display:none;flex-direction:column;
+    align-items:center;justify-content:center;
+    width:100%;height:100%;text-align:center;
 }
 .logo-fallback .bag{font-size:70px;line-height:1}
 .logo-fallback .name{font-size:34px;font-weight:900;color:#111}
@@ -68,89 +70,51 @@ header{
 .logo-fallback .tag{font-size:12px;color:#444;margin-top:4px}
 
 .container{
-    width:100%;
-    max-width:440px;
-    padding:15px;
-    margin:10px auto;
-    flex:1;
+    width:100%;max-width:440px;
+    padding:15px;margin:10px auto;flex:1;
 }
 
 .welcome{text-align:center;margin-bottom:20px}
-
-.welcome h1{
-    color:#f47716;
-    font-size:27px;
-    margin:10px 0;
-}
-
+.welcome h1{color:#f47716;font-size:27px;margin:10px 0}
 .welcome p{color:#888;font-size:13px;margin-top:3px}
 
 .cat{
-    font-size:70px;
-    display:inline-block;
+    font-size:70px;display:inline-block;
     animation:cat 2s infinite ease-in-out;
     filter:drop-shadow(0 10px 7px #0002);
 }
-
 @keyframes cat{
     0%,100%{transform:translateY(0) rotate(-5deg) scale(1)}
     50%{transform:translateY(-12px) rotate(5deg) scale(1.08)}
 }
 
 .card{
-    background:white;
-    padding:23px 19px;
-    border-radius:18px;
-    box-shadow:0 8px 30px #0000000c;
+    background:white;padding:23px 19px;
+    border-radius:18px;box-shadow:0 8px 30px #0000000c;
 }
 
 .tabs{display:flex;gap:8px;margin-bottom:22px}
 
 .tab{
-    flex:1;
-    padding:13px;
-    border:0;
-    border-radius:9px;
-    background:#eee;
-    font-weight:bold;
-    color:#555;
-    transition:.2s;
+    flex:1;padding:13px;border:0;border-radius:9px;
+    background:#eee;font-weight:bold;color:#555;transition:.2s;
 }
-
 .tab.active{background:#f47716;color:white}
 
 h2{font-size:23px;margin-bottom:8px}
 
-.subtitle{
-    font-size:13px;
-    color:#888;
-    margin-bottom:20px;
-    line-height:1.5;
-}
+.subtitle{font-size:13px;color:#888;margin-bottom:20px;line-height:1.5}
 
 .field{margin-bottom:15px}
-
-.field label{
-    display:block;
-    font-size:13px;
-    font-weight:bold;
-    margin-bottom:7px;
-}
+.field label{display:block;font-size:13px;font-weight:bold;margin-bottom:7px}
 
 .field input{
-    width:100%;
-    height:49px;
-    padding:0 12px;
-    border:1px solid #ddd;
-    border-radius:9px;
-    background:#fafafa;
-    outline:none;
-    transition:.2s;
+    width:100%;height:49px;padding:0 12px;
+    border:1px solid #ddd;border-radius:9px;
+    background:#fafafa;outline:none;transition:.2s;
 }
-
 .field input:focus{
-    border-color:#f47716;
-    background:white;
+    border-color:#f47716;background:white;
     box-shadow:0 0 0 3px #f4771620;
 }
 
@@ -158,127 +122,128 @@ h2{font-size:23px;margin-bottom:8px}
 .password input{padding-right:65px}
 
 .toggle{
-    position:absolute;
-    right:10px;
-    top:50%;
+    position:absolute;right:10px;top:50%;
     transform:translateY(-50%);
-    border:0;
-    background:none;
-    color:#f47716;
-    font-size:12px;
-    font-weight:bold;
-    padding:8px;
+    border:0;background:none;color:#f47716;
+    font-size:12px;font-weight:bold;padding:8px;
 }
 
 .primary{
-    width:100%;
-    height:50px;
-    border:0;
-    border-radius:10px;
+    width:100%;height:50px;border:0;border-radius:10px;
     background:linear-gradient(135deg,#ff9b20,#ef4b0a);
-    color:white;
-    font-weight:bold;
-    margin-top:8px;
-    box-shadow:0 5px 12px #f4771630;
-    transition:transform .1s;
+    color:white;font-weight:bold;margin-top:8px;
+    box-shadow:0 5px 12px #f4771630;transition:transform .1s;
 }
 .primary:active{transform:scale(.98)}
-.primary:disabled{opacity:.6;cursor:not-allowed}
+.primary:disabled{opacity:.55;cursor:not-allowed}
 
 .secondary{
-    display:block;
-    width:100%;
-    padding:13px;
-    background:none;
-    border:0;
-    color:#f47716;
-    font-weight:bold;
+    display:block;width:100%;padding:13px;
+    background:none;border:0;color:#f47716;font-weight:bold;
 }
 
 .row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:12px;
-    margin:5px 0 14px;
+    display:flex;justify-content:flex-end;align-items:center;
+    font-size:12px;margin:5px 0 14px;
 }
-
-.row label{display:flex;gap:5px;align-items:center}
-.row input{accent-color:#f47716}
-
-.link-btn{
-    width:auto;
-    padding:6px 0;
-    display:inline-block;
-    font-size:12px;
-}
+.link-btn{width:auto;padding:6px 0;display:inline-block;font-size:12px}
 
 .message{
-    display:none;
-    padding:12px;
-    margin-bottom:15px;
-    border-radius:8px;
-    font-size:13px;
-    overflow-wrap:anywhere;
+    display:none;padding:12px;margin-bottom:15px;
+    border-radius:8px;font-size:13px;overflow-wrap:anywhere;
 }
-
 .message.error{display:block;background:#fff0f0;color:#d63031}
 .message.success{display:block;background:#e9fff0;color:#168348}
 
 .hidden{display:none!important}
 
 .dashboard{
-    background:white;
-    padding:22px;
-    border-radius:16px;
-    box-shadow:0 5px 25px #0001;
+    background:white;padding:22px;
+    border-radius:16px;box-shadow:0 5px 25px #0001;
 }
-
 .dashboard h2{color:#f47716}
 
 .profile{
-    background:#f5f5f7;
-    padding:13px;
-    margin:10px 0;
-    border-radius:9px;
-    font-size:13px;
-    overflow-wrap:anywhere;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
+    background:#f5f5f7;padding:13px;margin:10px 0;
+    border-radius:9px;font-size:13px;overflow-wrap:anywhere;
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
 }
-
 .profile .val{flex:1;user-select:text;-webkit-user-select:text}
 
 .copy{
-    border:0;
-    background:#f47716;
-    color:white;
-    font-size:11px;
-    font-weight:bold;
-    padding:7px 11px;
-    border-radius:7px;
-    flex-shrink:0;
+    border:0;background:#f47716;color:white;
+    font-size:11px;font-weight:bold;
+    padding:7px 11px;border-radius:7px;flex-shrink:0;
 }
 .copy.done{background:#168348}
 
-.footer{
-    text-align:center;
-    color:#999;
-    font-size:11px;
-    padding:20px;
+.footer{text-align:center;color:#999;font-size:11px;padding:20px}
+
+/* ---------- OTP MODAL ---------- */
+.overlay{
+    position:fixed;inset:0;z-index:50;
+    background:#000a;
+    display:flex;align-items:center;justify-content:center;
+    padding:18px;
 }
+.modal{
+    width:100%;max-width:380px;background:white;
+    border-radius:20px;padding:26px 20px;
+    box-shadow:0 20px 60px #0006;text-align:center;
+    animation:pop .25s ease;
+}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+
+.modal .icon{font-size:46px}
+.modal h3{color:#f47716;font-size:21px;margin:8px 0}
+.modal .info{font-size:13px;color:#666;line-height:1.55;margin-bottom:16px;overflow-wrap:anywhere}
+.modal .info b{color:#202124}
+
+.otp-input{
+    width:100%;height:56px;
+    border:2px solid #ddd;border-radius:12px;
+    background:#fafafa;outline:none;
+    text-align:center;font-size:26px;font-weight:bold;
+    letter-spacing:10px;padding-left:10px;
+}
+.otp-input:focus{border-color:#f47716;background:white;box-shadow:0 0 0 3px #f4771620}
+
+.timer{margin:14px 0 4px;font-size:13px;color:#666}
+.timer b{color:#f47716;font-size:16px}
+.timer.expired b{color:#d63031}
+
+.resend{
+    width:100%;height:46px;margin-top:10px;
+    border-radius:10px;border:2px solid #ddd;
+    background:#f1f1f1;color:#aaa;font-weight:bold;
+}
+.resend:disabled{cursor:not-allowed}
+.resend.ready{
+    border-color:#f47716;background:#fff3e6;color:#f47716;
+    animation:glow 1.2s infinite ease-in-out;
+}
+@keyframes glow{
+    0%,100%{box-shadow:0 0 0 0 #f4771655}
+    50%{box-shadow:0 0 0 8px #f4771600;transform:scale(1.02)}
+}
+
+#otpMsg{margin:12px 0 0}
 
 @media(max-width:360px){
     .card{padding:17px 13px}
     .welcome h1{font-size:23px}
     .logo-wrap{width:160px;height:160px}
+    .otp-input{letter-spacing:6px;font-size:22px}
 }
 </style>
 </head>
 
 <body>
+
+<div id="splash">
+    <div class="spin"></div>
+    <p>ShopMart</p>
+</div>
 
 <header>
     <div class="logo-wrap">
@@ -319,38 +284,27 @@ h2{font-size:23px;margin-bottom:8px}
 <form id="loginForm" novalidate>
 
 <div class="field">
-<label for="loginIdentity">Email or Mobile Number</label>
-<input id="loginIdentity" type="text"
-placeholder="Email or +8801XXXXXXXXX"
+<label for="loginEmail">Email Address</label>
+<input id="loginEmail" type="email" placeholder="example@gmail.com"
 autocomplete="username" required>
 </div>
 
 <div class="field">
 <label for="loginPassword">Password</label>
 <div class="password">
-<input id="loginPassword" type="password"
-placeholder="Enter password"
+<input id="loginPassword" type="password" placeholder="Enter password"
 autocomplete="current-password" required>
 <button type="button" class="toggle" data-target="loginPassword">Show</button>
 </div>
 </div>
 
 <div class="row">
-<label>
-<input type="checkbox" id="remember" checked>
-Remember me
-</label>
-
-<button type="button" id="forgotLink" class="secondary link-btn">
-Forgot Password?
-</button>
+<button type="button" id="forgotLink" class="secondary link-btn">Forgot Password?</button>
 </div>
 
 <button class="primary" id="loginButton" type="submit">LOGIN TO SHOPMART</button>
 
-<button type="button" class="secondary" id="goRegister">
-New here? Create an account
-</button>
+<button type="button" class="secondary" id="goRegister">New here? Create an account</button>
 
 </form>
 </div>
@@ -358,33 +312,29 @@ New here? Create an account
 <!-- REGISTER -->
 <div id="registerView" class="hidden">
 <h2>Create Account</h2>
-<p class="subtitle">Join the ShopMart marketplace.</p>
+<p class="subtitle">Join the ShopMart marketplace. We will send a verification code to your email.</p>
 
 <form id="registerForm" novalidate>
 
 <div class="field">
 <label for="regName">Full Name</label>
-<input id="regName" type="text" placeholder="Enter your name"
-autocomplete="name" required>
+<input id="regName" type="text" placeholder="Enter your name" autocomplete="name" required>
 </div>
 
 <div class="field">
 <label for="regEmail">Email Address</label>
-<input id="regEmail" type="email" placeholder="example@gmail.com"
-autocomplete="email" required>
+<input id="regEmail" type="email" placeholder="example@gmail.com" autocomplete="email" required>
 </div>
 
 <div class="field">
 <label for="regPhone">Mobile Number (Required)</label>
-<input id="regPhone" type="tel" placeholder="+8801XXXXXXXXX"
-autocomplete="tel" required>
+<input id="regPhone" type="tel" placeholder="+8801XXXXXXXXX" autocomplete="tel" required>
 </div>
 
 <div class="field">
 <label for="regPassword">Password</label>
 <div class="password">
-<input id="regPassword" type="password"
-placeholder="Minimum 8 characters"
+<input id="regPassword" type="password" placeholder="Minimum 8 characters"
 autocomplete="new-password" required>
 <button type="button" class="toggle" data-target="regPassword">Show</button>
 </div>
@@ -399,11 +349,9 @@ autocomplete="new-password" required>
 </div>
 </div>
 
-<button class="primary" id="registerButton" type="submit">CREATE ACCOUNT</button>
+<button class="primary" id="registerButton" type="submit">CONFIRM &amp; SEND CODE</button>
 
-<button type="button" class="secondary" id="goLogin">
-Already have an account? Login
-</button>
+<button type="button" class="secondary" id="goLogin">Already have an account? Login</button>
 
 </form>
 </div>
@@ -411,17 +359,13 @@ Already have an account? Login
 <!-- FORGOT -->
 <div id="forgotView" class="hidden">
 <h2>Forgot Password?</h2>
-<p class="subtitle">
-Enter your registered email address to receive a password reset link.
-</p>
+<p class="subtitle">Enter your registered email address to receive a password reset link.</p>
 
 <form id="forgotForm" novalidate>
 <div class="field">
 <label for="forgotEmail">Registered Email</label>
-<input id="forgotEmail" type="email" placeholder="Enter your email"
-autocomplete="email" required>
+<input id="forgotEmail" type="email" placeholder="Enter your email" autocomplete="email" required>
 </div>
-
 <button class="primary" id="forgotButton" type="submit">SEND RESET LINK</button>
 </form>
 
@@ -459,9 +403,7 @@ Your account is successfully connected.
 <button type="button" class="copy" data-copy="userUID">COPY</button>
 </div>
 
-<button class="primary" id="logoutButton" type="button" style="background:#222">
-LOG OUT
-</button>
+<button class="primary" id="logoutButton" type="button" style="background:#222">LOG OUT</button>
 
 </section>
 
@@ -473,6 +415,29 @@ LOG OUT
 BUY • SELL • DELIVER
 </footer>
 
+<!-- OTP MODAL -->
+<div id="otpOverlay" class="overlay hidden">
+<div class="modal">
+    <div class="icon">📧</div>
+    <h3>Verify Your Email</h3>
+    <p class="info">
+        Enter the 6-digit one-time password we sent to<br>
+        <b id="otpEmailText"></b>
+    </p>
+
+    <input id="otpInput" class="otp-input" type="text" inputmode="numeric"
+           maxlength="6" placeholder="••••••" autocomplete="one-time-code">
+
+    <div id="otpTimer" class="timer">Code expires in <b>01:00</b></div>
+
+    <div id="otpMsg" class="message"></div>
+
+    <button id="otpContinue" class="primary" type="button">CONTINUE</button>
+    <button id="otpResend" class="resend" type="button" disabled>REQUEST OTP AGAIN</button>
+    <button id="otpCancel" class="secondary" type="button">Cancel</button>
+</div>
+</div>
+
 
 <script type="module">
 
@@ -483,44 +448,55 @@ import {
 getAuth,
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword,
-signInWithCustomToken,
 sendPasswordResetEmail,
 onAuthStateChanged,
 signOut,
 updateProfile,
 deleteUser,
 setPersistence,
-browserLocalPersistence,
-browserSessionPersistence
+browserLocalPersistence
 }
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-import { getDatabase, ref, set, get }
-from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
-
-import { getFunctions, httpsCallable }
-from "https://www.gstatic.com/firebasejs/12.18.0/firebase-functions.js";
+import { getFirestore, doc, setDoc, getDoc, deleteDoc }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-/* ===================================
-   FIREBASE CONFIGURATION
-   (replace YOUR_... values with your real keys)
-=================================== */
+/* =====================================================
+   1) EMAILJS SETTINGS  (put your 3 values here later)
+   Get them from https://dashboard.emailjs.com
+   - Public Key : Account -> General
+   - Service ID : Email Services
+   - Template ID: Email Templates
+===================================================== */
+
+const EMAILJS_PUBLIC_KEY  = "YOUR_EMAILJS_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID  = "YOUR_EMAILJS_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID";
+
+/* Template variables used: {{to_email}} {{to_name}} {{otp_code}} {{app_name}} {{valid_minutes}} */
+
+const OTP_SECONDS = 60;      // OTP lifetime (1 minute)
+const OTP_MAX_TRIES = 5;     // wrong attempts allowed
+
+
+/* =====================================================
+   2) FIREBASE CONFIGURATION
+===================================================== */
 
 const firebaseConfig = {
-apiKey: "YOUR_FIREBASE_API_KEY",
-authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-projectId: "YOUR_PROJECT_ID",
-storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
-messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-appId: "YOUR_FIREBASE_APP_ID"
+apiKey: "AIzaSyDXpSM5_worgxL-6pO3W1BsrEQLgHIvfpI",
+authDomain: "shopmart-c7671.firebaseapp.com",
+projectId: "shopmart-c7671",
+storageBucket: "shopmart-c7671.firebasestorage.app",
+messagingSenderId: "669118527940",
+appId: "1:669118527940:web:e81ca3fa6ae148db750c91"
 };
 
 
-/* ===================================
-   HELPERS (run before Firebase so buttons always work)
-=================================== */
+/* =====================================================
+   HELPERS
+===================================================== */
 
 const $ = id => document.getElementById(id);
 
@@ -551,24 +527,28 @@ return phone;
 function errorMessage(error){
 const code=error?.code||"";
 if(code==="auth/email-already-in-use") return "This email is already registered.";
-if(code==="auth/invalid-credential"||code==="auth/wrong-password"||code==="auth/user-not-found"||code==="functions/not-found"||code==="functions/unauthenticated")
-return "Incorrect email/mobile or password.";
-if(code==="functions/already-exists") return "This mobile number is already registered.";
+if(code==="auth/invalid-credential"||code==="auth/wrong-password"||code==="auth/user-not-found")
+return "Incorrect email or password.";
 if(code==="auth/weak-password") return "Password must contain at least 8 characters.";
 if(code==="auth/invalid-email") return "Invalid email address.";
 if(code==="auth/network-request-failed") return "Internet connection problem.";
 if(code==="auth/too-many-requests") return "Too many attempts. Try again later.";
+if(code==="auth/operation-not-allowed") return "Email/Password sign-in is not enabled in Firebase Authentication.";
 if(code==="auth/api-key-not-valid"||code==="auth/invalid-api-key"||code==="auth/configuration-not-found")
-return "Firebase is not configured yet. Add your real Firebase keys.";
+return "Firebase is not configured correctly.";
+if(code==="permission-denied"||code==="firestore/permission-denied")
+return "Database permission denied. Check your Firestore rules.";
 return error?.message||"Something went wrong.";
 }
 
 function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
+function hideSplash(){ $("splash").classList.add("hidden"); }
 
-/* ===================================
+
+/* =====================================================
    LOGO FALLBACK
-=================================== */
+===================================================== */
 
 $("logoImg").addEventListener("error",()=>{
 $("logoImg").style.display="none";
@@ -576,9 +556,9 @@ $("logoFallback").style.display="flex";
 });
 
 
-/* ===================================
-   PAGE NAVIGATION (works even without Firebase)
-=================================== */
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
 
 function showView(view){
 $("loginView").classList.toggle("hidden",view!=="login");
@@ -595,16 +575,16 @@ $("goLogin").onclick=()=>{ clearNotice(); showView("login"); };
 $("backLogin").onclick=()=>{ clearNotice(); showView("login"); };
 
 $("forgotLink").onclick=()=>{
-const value=$("loginIdentity").value.trim();
+const value=$("loginEmail").value.trim();
 if(value.includes("@")) $("forgotEmail").value=value;
 clearNotice();
 showView("forgot");
 };
 
 
-/* ===================================
+/* =====================================================
    SHOW / HIDE PASSWORD
-=================================== */
+===================================================== */
 
 document.querySelectorAll(".toggle").forEach(button=>{
 button.onclick=()=>{
@@ -618,9 +598,9 @@ input.type="password"; button.textContent="Show";
 });
 
 
-/* ===================================
+/* =====================================================
    COPY BUTTONS
-=================================== */
+===================================================== */
 
 async function copyText(text){
 try{
@@ -656,20 +636,20 @@ setTimeout(()=>{ btn.textContent="COPY"; btn.classList.remove("done"); },1500);
 });
 
 
-/* ===================================
-   FIREBASE INIT (safe: errors won't break the buttons above)
-=================================== */
+/* =====================================================
+   FIREBASE INIT
+===================================================== */
 
-let auth,database,loginPhone,registerPhone;
+let auth,database;
 let firebaseReady=false;
 
 try{
 const app=initializeApp(firebaseConfig);
 auth=getAuth(app);
-database=getDatabase(app);
-const functions=getFunctions(app,"asia-south1");
-loginPhone=httpsCallable(functions,"loginWithPhone");
-registerPhone=httpsCallable(functions,"registerPhoneIndex");
+database=getFirestore(app);
+// AUTO LOGIN: session is kept on the device until the user taps LOG OUT
+// (or deletes the app / clears its data)
+setPersistence(auth,browserLocalPersistence).catch(()=>{});
 firebaseReady=true;
 }catch(error){
 console.error(error);
@@ -677,18 +657,176 @@ console.error(error);
 
 function needFirebase(){
 if(!firebaseReady){
-notify("Firebase is not configured yet. Add your real Firebase keys.");
+notify("Firebase could not start. Check your internet and keys.");
 return false;
 }
 return true;
 }
 
-let registering=false; // stops dashboard flash during registration
+let registering=false; // blocks the auto dashboard while registration is running
 
 
-/* ===================================
+/* =====================================================
+   EMAIL OTP (EmailJS)
+===================================================== */
+
+let pending=null;       // {name,email,phone,password}
+let otpCode=null;
+let otpExpiresAt=0;
+let otpTries=0;
+let otpTimerId=null;
+
+function emailjsReady(){
+return !EMAILJS_PUBLIC_KEY.startsWith("YOUR_")
+    && !EMAILJS_SERVICE_ID.startsWith("YOUR_")
+    && !EMAILJS_TEMPLATE_ID.startsWith("YOUR_");
+}
+
+function makeOtp(){
+const n=new Uint32Array(1);
+crypto.getRandomValues(n);
+return String(100000+(n[0]%900000));
+}
+
+async function sendOtpEmail(){
+if(!emailjsReady())
+throw new Error("Email service is not set up yet. Add your EmailJS keys in the code.");
+
+otpCode=makeOtp();
+otpTries=0;
+
+const res=await fetch("https://api.emailjs.com/api/v1.0/email/send",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+service_id:EMAILJS_SERVICE_ID,
+template_id:EMAILJS_TEMPLATE_ID,
+user_id:EMAILJS_PUBLIC_KEY,
+template_params:{
+to_email:pending.email,
+to_name:pending.name,
+otp_code:otpCode,
+app_name:"ShopMart",
+valid_minutes:String(Math.round(OTP_SECONDS/60))
+}
+})
+});
+
+if(!res.ok){
+otpCode=null;
+const t=await res.text().catch(()=>"");
+throw new Error("Could not send the code. "+(t||"Check your EmailJS settings."));
+}
+
+otpExpiresAt=Date.now()+OTP_SECONDS*1000;
+startTimer();
+}
+
+function otpMsg(text,type="error"){
+const box=$("otpMsg");
+box.textContent=text;
+box.className="message "+type;
+}
+
+function clearOtpMsg(){ $("otpMsg").className="message"; }
+
+function startTimer(){
+clearInterval(otpTimerId);
+$("otpResend").disabled=true;
+$("otpResend").classList.remove("ready");
+$("otpContinue").disabled=false;
+$("otpTimer").classList.remove("expired");
+tick();
+otpTimerId=setInterval(tick,250);
+}
+
+function tick(){
+const left=Math.max(0,Math.ceil((otpExpiresAt-Date.now())/1000));
+const m=String(Math.floor(left/60)).padStart(2,"0");
+const s=String(left%60).padStart(2,"0");
+
+if(left>0){
+$("otpTimer").innerHTML="Code expires in <b>"+m+":"+s+"</b>";
+}else{
+expireOtp();
+}
+}
+
+function expireOtp(){
+clearInterval(otpTimerId);
+otpCode=null;
+$("otpTimer").classList.add("expired");
+$("otpTimer").innerHTML="Code expired <b>00:00</b>";
+$("otpContinue").disabled=true;
+$("otpResend").disabled=false;
+$("otpResend").classList.add("ready");
+}
+
+function openOtp(){
+$("otpEmailText").textContent=pending.email;
+$("otpInput").value="";
+clearOtpMsg();
+$("otpOverlay").classList.remove("hidden");
+setTimeout(()=>$("otpInput").focus(),200);
+}
+
+function closeOtp(){
+clearInterval(otpTimerId);
+otpCode=null;
+pending=null;
+$("otpOverlay").classList.add("hidden");
+}
+
+$("otpInput").addEventListener("input",e=>{
+e.target.value=e.target.value.replace(/\D/g,"").slice(0,6);
+});
+
+$("otpCancel").onclick=()=>{ closeOtp(); };
+
+$("otpResend").onclick=async()=>{
+const btn=$("otpResend");
+btn.disabled=true;
+btn.textContent="Sending...";
+clearOtpMsg();
+try{
+await sendOtpEmail();
+$("otpInput").value="";
+otpMsg("A new code has been sent to your email.","success");
+}catch(error){
+otpMsg(error.message);
+btn.disabled=false;
+btn.classList.add("ready");
+}finally{
+btn.textContent="REQUEST OTP AGAIN";
+}
+};
+
+$("otpContinue").onclick=async()=>{
+clearOtpMsg();
+const entered=$("otpInput").value.trim();
+
+if(entered.length!==6){ otpMsg("Enter the 6-digit code."); return; }
+if(!otpCode||Date.now()>otpExpiresAt){ expireOtp(); otpMsg("Code expired. Request a new one."); return; }
+
+if(entered!==otpCode){
+otpTries++;
+if(otpTries>=OTP_MAX_TRIES){
+expireOtp();
+otpMsg("Too many wrong attempts. Request a new code.");
+}else{
+otpMsg("Wrong code. "+(OTP_MAX_TRIES-otpTries)+" attempts left.");
+}
+return;
+}
+
+// correct OTP -> create the account
+await createAccount();
+};
+
+
+/* =====================================================
    REGISTRATION
-=================================== */
+===================================================== */
 
 $("registerForm").addEventListener("submit",async e=>{
 e.preventDefault();
@@ -710,96 +848,104 @@ catch(error){ notify(error.message); return; }
 if(password.length<8){ notify("Password must be at least 8 characters."); return; }
 if(password!==confirm){ notify("Passwords do not match."); return; }
 
-loading(button,true,"CREATE ACCOUNT");
+pending={name,email,phone,password};
+
+loading(button,true,"CONFIRM & SEND CODE");
+clearNotice();
+
+try{
+await sendOtpEmail();
+openOtp();
+}catch(error){
+pending=null;
+notify(error.message);
+}finally{
+loading(button,false,"CONFIRM & SEND CODE");
+}
+});
+
+async function createAccount(){
+if(!pending) return;
+
+const btn=$("otpContinue");
+btn.disabled=true;
+btn.textContent="Please wait...";
 registering=true;
 
+const data=pending;
 let user=null;
 
 try{
-const result=await createUserWithEmailAndPassword(auth,email,password);
+const result=await createUserWithEmailAndPassword(auth,data.email,data.password);
 user=result.user;
 
-await updateProfile(user,{displayName:name});
+await updateProfile(user,{displayName:data.name});
 
-await set(ref(database,"users/"+user.uid),{
+await setDoc(doc(database,"users",user.uid),{
 uid:user.uid,
-fullName:name,
-email:email,
-phone:phone,
+fullName:data.name,
+email:data.email,
+phone:data.phone,
+emailVerified:true,
 createdAt:Date.now(),
 accountStatus:"active"
 });
 
-await registerPhone({phone:phone});
-
-await signOut(auth);
-
+closeOtp();
 $("registerForm").reset();
-$("loginIdentity").value=email;
-$("loginPassword").value="";
-showView("login");
-notify("Registration successful! Please login.","success");
+registering=false;
+
+// go straight to the dashboard
+await dashboard(auth.currentUser||user);
 
 }catch(error){
 
-// roll back so the email is not stuck half-registered
 if(user){
-await set(ref(database,"users/"+user.uid),null).catch(()=>{});
+await deleteDoc(doc(database,"users",user.uid)).catch(()=>{});
 await deleteUser(user).catch(()=>{});
 await signOut(auth).catch(()=>{});
 }
 
+registering=false;
+
+if(error?.code==="auth/email-already-in-use"){
+closeOtp();
+showView("register");
 notify(errorMessage(error));
+}else{
+otpMsg(errorMessage(error));
+}
 
 }finally{
 registering=false;
-loading(button,false,"CREATE ACCOUNT");
+btn.textContent="CONTINUE";
+if(otpCode&&Date.now()<otpExpiresAt) btn.disabled=false;
 }
-});
+}
 
 
-/* ===================================
-   EMAIL OR MOBILE LOGIN
-=================================== */
+/* =====================================================
+   LOGIN
+===================================================== */
 
 $("loginForm").addEventListener("submit",async e=>{
 e.preventDefault();
 if(!needFirebase()) return;
 
 const button=$("loginButton");
-const identity=$("loginIdentity").value.trim();
+const email=$("loginEmail").value.trim().toLowerCase();
 const password=$("loginPassword").value;
 
-if(!identity||!password){ notify("Enter your login details."); return; }
+if(!email||!password){ notify("Enter your login details."); return; }
+if(!isValidEmail(email)){ notify("Enter your registered email address."); return; }
 
 loading(button,true,"LOGIN TO SHOPMART");
 
 try{
-
-await setPersistence(
-auth,
-$("remember").checked?browserLocalPersistence:browserSessionPersistence
-);
-
-if(identity.includes("@")){
-
-await signInWithEmailAndPassword(auth,identity.toLowerCase(),password);
-
-}else{
-
-const phone=normalizePhone(identity);
-
-const result=await loginPhone({phone:phone,password:password});
-
-if(!result.data?.customToken) throw new Error("Invalid login response.");
-
-await signInWithCustomToken(auth,result.data.customToken);
-
-}
-
+await setPersistence(auth,browserLocalPersistence);
+await signInWithEmailAndPassword(auth,email,password);
 clearNotice();
 $("loginPassword").value="";
-
 }catch(error){
 notify(errorMessage(error));
 }finally{
@@ -808,9 +954,9 @@ loading(button,false,"LOGIN TO SHOPMART");
 });
 
 
-/* ===================================
+/* =====================================================
    FORGOT PASSWORD
-=================================== */
+===================================================== */
 
 $("forgotForm").addEventListener("submit",async e=>{
 e.preventDefault();
@@ -829,7 +975,6 @@ $("forgotForm").reset();
 notify("If this email is registered, a password reset link has been sent.","success");
 setTimeout(()=>showView("login"),3000);
 }catch(error){
-// don't reveal whether the email exists
 if(error?.code==="auth/user-not-found"){
 notify("If this email is registered, a password reset link has been sent.","success");
 }else{
@@ -841,11 +986,12 @@ loading(button,false,"SEND RESET LINK");
 });
 
 
-/* ===================================
+/* =====================================================
    DASHBOARD
-=================================== */
+===================================================== */
 
 async function dashboard(user){
+clearNotice();
 $("authSection").classList.add("hidden");
 $("dashboard").classList.remove("hidden");
 
@@ -855,9 +1001,9 @@ $("userUID").textContent=user.uid;
 $("userPhone").textContent="Loading...";
 
 try{
-const result=await get(ref(database,"users/"+user.uid));
+const result=await getDoc(doc(database,"users",user.uid));
 if(result.exists()){
-const data=result.val();
+const data=result.data();
 $("userName").textContent=data.fullName||user.displayName||"Member";
 $("userPhone").textContent=data.phone||"Not available";
 }else{
@@ -869,12 +1015,13 @@ $("userPhone").textContent="Unavailable";
 }
 
 
-/* ===================================
-   AUTH SESSION
-=================================== */
+/* =====================================================
+   AUTH SESSION  (AUTO LOGIN)
+===================================================== */
 
 if(firebaseReady){
 onAuthStateChanged(auth,user=>{
+hideSplash();
 if(user&&!registering){
 dashboard(user);
 }else if(!user){
@@ -883,12 +1030,15 @@ $("authSection").classList.remove("hidden");
 showView("login");
 }
 });
+setTimeout(hideSplash,6000); // safety: never leave the splash stuck
+}else{
+hideSplash();
 }
 
 
-/* ===================================
+/* =====================================================
    LOGOUT
-=================================== */
+===================================================== */
 
 $("logoutButton").onclick=async()=>{
 if(!needFirebase()) return;
