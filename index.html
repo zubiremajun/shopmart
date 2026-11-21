@@ -1037,7 +1037,7 @@ if(firebaseReady){
 onAuthStateChanged(auth,user=>{
 hideSplash();
 if(user&&!registering){
-dashboard(user);
+location.replace("dashboard.html");
 }else if(!user){
 $("dashboard").classList.add("hidden");
 $("authSection").classList.remove("hidden");
